@@ -12,6 +12,6 @@ namespace UniversityWebApplication.Models
         [Required]
         public string CategoryName { get; set; }
 
-        public List<ToDo> ToDos { get; set; }
+        public List<ToDo> ToDos { get; set; } = new List<ToDo>();
     }
 }

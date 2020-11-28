@@ -21,7 +21,10 @@ namespace UniversityWebApplication.Controllers
         // GET: ToDos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ToDos.ToListAsync());
+            var toDoObj = _context.ToDos
+                .Include(c => c.ToDoCategory)
+                .ToList();
+            return View(toDoObj);
         }
 
         // GET: ToDos/Details/5

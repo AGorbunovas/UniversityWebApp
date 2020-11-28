@@ -13,7 +13,13 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.ToDoName)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Priority)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsDone)
@@ -28,7 +34,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.ToDoName)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Priority)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsDone)
