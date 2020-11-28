@@ -8,7 +8,7 @@ namespace UniversityWebApplication.Data
     {
         public static void Initialize(AppDbContext context)
         {
-            context.Database.EnsureDeleted();
+            //context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
 
             if (context.ToDoCategories.Any())
@@ -27,7 +27,11 @@ namespace UniversityWebApplication.Data
                         CategoryName = "Home"
                     }
                 };
-            context.ToDoCategories.AddRange(toDoCategory);
+            //context.ToDoCategories.AddRange(toDoCategory);
+            foreach (ToDoCategory category in toDoCategory)
+            {
+                context.ToDoCategories.Add(category);
+            }
             context.SaveChanges();
 
             var toDoList = new ToDo[]
@@ -57,7 +61,11 @@ namespace UniversityWebApplication.Data
                         ToDoCategory_Id = 2
                     }
                 };
-            context.ToDos.AddRange(toDoList);
+            //context.ToDos.AddRange(toDoList);
+            foreach (ToDo list in toDoList)
+            {
+                context.ToDos.Add(list);
+            }
             context.SaveChanges();
         }
     }

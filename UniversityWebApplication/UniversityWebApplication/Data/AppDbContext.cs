@@ -21,8 +21,8 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<ToDo>().ToTable("ToDo");
         modelBuilder.Entity<ToDoCategory>().ToTable("ToDoCategory");
+        modelBuilder.Entity<ToDo>().ToTable("ToDo");
 
         modelBuilder.Entity<ToDo>()
             .HasOne(c => c.ToDoCategory)

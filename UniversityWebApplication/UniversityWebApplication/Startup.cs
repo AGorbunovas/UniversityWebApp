@@ -25,9 +25,11 @@ namespace UniversityWebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddDbContext<AppDbContext>(options =>
-                    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+                    options.UseSqlServer(
+                        Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
