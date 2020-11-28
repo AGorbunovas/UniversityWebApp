@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -15,6 +16,7 @@ namespace UniversityWebApplication.Models
         [Required]
         public string Description { get; set; }
 
+        [DefaultValue(3)]
         [Required]
         public int Priority { get; set; }
 

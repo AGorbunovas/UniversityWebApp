@@ -42,13 +42,6 @@ namespace UniversityWebApplication.Data
             };
             context.ToDoCategories.AddRange(work, home);
 
-            //foreach (ToDoCategory category in toDoCategory)
-            //{
-            //context.ToDoCategories.Add(category);
-            //}
-            //context.SaveChanges();
-
-
             ToDo post = new ToDo
             {
                 ToDoName = "Paštas",
@@ -81,12 +74,15 @@ namespace UniversityWebApplication.Data
                 IsDone = true,
                 ToDoCategory = home
             };
+            ToDo drive = new ToDo
+            {
+                ToDoName = "Poilsis",
+                Description = "Kartingai",
+                IsDone = true,
+                ToDoCategory = home
+            };
+            context.ToDos.AddRange(post, buy, meeting, rest, drive);
 
-            context.ToDos.AddRange(post, buy, meeting, rest);
-            //foreach (ToDo list in toDoList)
-            //{
-            //context.ToDos.Add(list);
-            //}
             context.SaveChanges();
             #endregion
         }
