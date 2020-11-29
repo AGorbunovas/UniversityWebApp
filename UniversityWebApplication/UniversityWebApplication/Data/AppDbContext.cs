@@ -28,5 +28,8 @@ public class AppDbContext : DbContext
             .HasOne(c => c.ToDoCategory)
             .WithMany(t => t.ToDos)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<ToDo>()
+            .Property(t => t.Priority).HasDefaultValue(3);
     }
 }
