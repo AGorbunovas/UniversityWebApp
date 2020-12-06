@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -7,26 +6,25 @@ using UniversityWebApplication.Models;
 
 namespace UniversityWebApplication.Controllers
 {
-    public class ToDoCategoriesController : Controller
+    public class ToDosController : Controller
     {
         private readonly AppDbContext _context;
 
-        public ToDoCategoriesController(AppDbContext context)
+        public ToDosController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: ToDoCategories
+        // GET: ToDos
         public IActionResult Index()
-        //public IActionResult Main()
         {
-            List<ToDoCategory> objList = _context.ToDoCategories.Include(c => c.ToDos)
-            .ToList();
-            return View(objList);
-            //return View();
+            var toDoObj = _context.ToDos
+                .Include(c => c.ToDoCategory)
+                .ToList();
+            return View(toDoObj);
         }
 
-        // GET: ToDoCategories/Details/5
+        // GET: ToDos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +32,39 @@ namespace UniversityWebApplication.Controllers
                 return NotFound();
             }
 
-            var toDoCategory = await _context.ToDoCategories
-                .FirstOrDefaultAsync(m => m.Category_Id == id);
-            if (toDoCategory == null)
+            var toDo = await _context.ToDos
+                .FirstOrDefaultAsync(m => m.ToDo_Id == id);
+            if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(toDoCategory);
+            return View(toDo);
         }
 
-        // GET: ToDoCategories/Create
+        // GET: ToDos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ToDoCategories/Create
+        // POST: ToDos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Category_Id,CategoryName")] ToDoCategory toDoCategory)
+        public async Task<IActionResult> Create([Bind("ToDo_Id,Description,IsDone,ToDoCategory_Id")] ToDo toDo)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(toDoCategory);
+                _context.Add(toDo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(toDoCategory);
+            return View(toDo);
         }
 
-        // GET: ToDoCategories/Edit/5
+        // GET: ToDos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,22 +72,22 @@ namespace UniversityWebApplication.Controllers
                 return NotFound();
             }
 
-            var toDoCategory = await _context.ToDoCategories.FindAsync(id);
-            if (toDoCategory == null)
+            var toDo = await _context.ToDos.FindAsync(id);
+            if (toDo == null)
             {
                 return NotFound();
             }
-            return View(toDoCategory);
+            return View(toDo);
         }
 
-        // POST: ToDoCategories/Edit/5
+        // POST: ToDos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Category_Id,CategoryName")] ToDoCategory toDoCategory)
+        public async Task<IActionResult> Edit(int id, [Bind("ToDo_Id,Description,IsDone,ToDoCategory_Id")] ToDo toDo)
         {
-            if (id != toDoCategory.Category_Id)
+            if (id != toDo.ToDo_Id)
             {
                 return NotFound();
             }
@@ -98,12 +96,12 @@ namespace UniversityWebApplication.Controllers
             {
                 try
                 {
-                    _context.Update(toDoCategory);
+                    _context.Update(toDo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ToDoCategoryExists(toDoCategory.Category_Id))
+                    if (!ToDoExists(toDo.ToDo_Id))
                     {
                         return NotFound();
                     }
@@ -114,10 +112,10 @@ namespace UniversityWebApplication.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(toDoCategory);
+            return View(toDo);
         }
 
-        // GET: ToDoCategories/Delete/5
+        // GET: ToDos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,30 +123,30 @@ namespace UniversityWebApplication.Controllers
                 return NotFound();
             }
 
-            var toDoCategory = await _context.ToDoCategories
-                .FirstOrDefaultAsync(m => m.Category_Id == id);
-            if (toDoCategory == null)
+            var toDo = await _context.ToDos
+                .FirstOrDefaultAsync(m => m.ToDo_Id == id);
+            if (toDo == null)
             {
                 return NotFound();
             }
 
-            return View(toDoCategory);
+            return View(toDo);
         }
 
-        // POST: ToDoCategories/Delete/5
+        // POST: ToDos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var toDoCategory = await _context.ToDoCategories.FindAsync(id);
-            _context.ToDoCategories.Remove(toDoCategory);
+            var toDo = await _context.ToDos.FindAsync(id);
+            _context.ToDos.Remove(toDo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ToDoCategoryExists(int id)
+        private bool ToDoExists(int id)
         {
-            return _context.ToDoCategories.Any(e => e.Category_Id == id);
+            return _context.ToDos.Any(e => e.ToDo_Id == id);
         }
     }
 }
