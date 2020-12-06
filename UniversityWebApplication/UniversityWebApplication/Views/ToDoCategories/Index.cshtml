@@ -13,9 +13,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.CategoryName)
             </th>
-            <th>
-                Darbu sarasas
-            </th>
+            <th> </th>
         </tr>
     </thead>
     <tbody>
@@ -25,14 +23,7 @@
     <td>
         @Html.DisplayFor(modelItem => item.CategoryName)
     </td>
-    <td>
-        @*
-        @{ var list = "";}
-        @foreach (var listType in item.)
-        {
-
-        }*@
-    </td>
+    <td></td>
     <td>
         <a asp-action="Edit" asp-route-id="@item.Category_Id">Edit</a> |
         <a asp-action="Details" asp-route-id="@item.Category_Id">Details</a> |
