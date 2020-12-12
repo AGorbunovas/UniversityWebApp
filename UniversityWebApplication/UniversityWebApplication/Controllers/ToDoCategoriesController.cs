@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using UniversityWebApplication.Models;
+using UniversityWebApplication.ViewModels;
 
 namespace UniversityWebApplication.Controllers
 {
@@ -20,10 +21,15 @@ namespace UniversityWebApplication.Controllers
         public IActionResult Index()
         //public IActionResult Main()
         {
+            var model = new CategoryVM();
+            model.Top5 = _context.ToDoCategories.Take(5);
+            model.Items = _context.ToDoCategories.ToList();
+            /*
             List<ToDoCategory> objList = _context.ToDoCategories.Include(c => c.ToDos)
             .ToList();
-            return View(objList);
-            //return View();
+            */
+            //return View(objList);
+            return View(model);
         }
 
         // GET: ToDoCategories/Details/5

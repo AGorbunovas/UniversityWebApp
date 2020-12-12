@@ -14,32 +14,27 @@ namespace UniversityWebApplication.Data
             {
                 return;
             }
-            #region First initialize method
-            /*
-            ToDoCategory work = new ToDoCategory { CategoryName = "Work" };
-            ToDoCategory home = new ToDoCategory { CategoryName = "Home" };
-            context.ToDoCategories.AddRange(work, home);
 
-            ToDo pastas = new ToDo { ToDoName = "Paštas", Description = "Peržiūrėti paštą", IsDone = false, Priority = 4, ToDoCategory = work };
-            ToDo apsipirkimai = new ToDo { ToDoName = "Apsipirkimai", Description = "Nueiti į parduotuvę", IsDone = false, Priority = 3, ToDoCategory = home };
-            ToDo susitikimai = new ToDo { ToDoName = "Susitikimai", Description = "Susitikimas su užsakovu", IsDone = false, Priority = 4, ToDoCategory = work };
-            ToDo poilsis = new ToDo { ToDoName = "Poilsis", Description = "Kelionė į kalnus", IsDone = true, Priority = 2, ToDoCategory = home };
-            context.ToDos.AddRange(pastas, apsipirkimai, susitikimai, poilsis);
-
-            context.SaveChanges();
-            */
-            #endregion
-
-            #region Second initialize method
+            #region Initialize DB data
             ToDoCategory work = new ToDoCategory
             {
-                CategoryName = "Work"
+                CategoryName = "Darbas"
             };
             ToDoCategory home = new ToDoCategory
             {
-                CategoryName = "Home"
+                CategoryName = "Namai"
             };
             context.ToDoCategories.AddRange(work, home);
+
+            Label dontDisturb = new Label
+            {
+                LabelName = "Netrukdyti"
+            };
+            Label drive = new Label
+            {
+                LabelName = "Vairuoju"
+            };
+            context.Labels.AddRange(dontDisturb, drive);
 
             ToDo post = new ToDo
             {
@@ -73,14 +68,31 @@ namespace UniversityWebApplication.Data
                 IsDone = true,
                 ToDoCategory = home
             };
-            ToDo drive = new ToDo
+            ToDo driveFast = new ToDo
             {
                 ToDoName = "Poilsis",
                 Description = "Kartingai",
                 IsDone = true,
                 ToDoCategory = home
             };
-            context.ToDos.AddRange(post, buy, meeting, rest, drive);
+            context.ToDos.AddRange(post, buy, meeting, rest, driveFast);
+
+            ToDoLabel dontDisturbAtRest = new ToDoLabel
+            {
+                ToDo = rest,
+                Label = dontDisturb
+            };
+            ToDoLabel dontDisturbWhileFastDrive = new ToDoLabel
+            {
+                ToDo = driveFast,
+                Label = dontDisturb
+            };
+            ToDoLabel driveAtDriveFast = new ToDoLabel
+            {
+                ToDo = driveFast,
+                Label = drive
+            };
+            context.ToDoLabels.AddRange(dontDisturbAtRest, dontDisturbWhileFastDrive, driveAtDriveFast);
 
             context.SaveChanges();
             #endregion
