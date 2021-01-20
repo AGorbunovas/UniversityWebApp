@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using UniversityWebApplication.Enum;
 
 namespace UniversityWebApplication.Models
 {
@@ -25,5 +26,7 @@ namespace UniversityWebApplication.Models
 
         [NotMapped]
         public ToDoCategory ToDoCategory { get; set; }
+
+        public ToDoStatus? ToDoStatus { get; set; }
     }
 }

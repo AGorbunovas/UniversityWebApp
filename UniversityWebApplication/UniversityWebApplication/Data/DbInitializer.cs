@@ -42,7 +42,8 @@ namespace UniversityWebApplication.Data
                 Description = "Peržiūrėti paštą",
                 Priority = 4,
                 IsDone = false,
-                ToDoCategory = work
+                ToDoCategory = work,
+                ToDoStatus = Enum.ToDoStatus.Planned
             };
             ToDo buy = new ToDo
             {
@@ -50,7 +51,8 @@ namespace UniversityWebApplication.Data
                 Description = "Nueiti į parduotuvę",
                 Priority = 3,
                 IsDone = false,
-                ToDoCategory = home
+                ToDoCategory = home,
+                ToDoStatus = Enum.ToDoStatus.Done
             };
             ToDo meeting = new ToDo
             {
@@ -58,7 +60,8 @@ namespace UniversityWebApplication.Data
                 Description = "Susitikimas su užsakovu",
                 Priority = 4,
                 IsDone = true,
-                ToDoCategory = work
+                ToDoCategory = work,
+                ToDoStatus = Enum.ToDoStatus.Backlog
             };
             ToDo rest = new ToDo
             {
@@ -66,14 +69,16 @@ namespace UniversityWebApplication.Data
                 Description = "Kelionė į kalnus",
                 Priority = 2,
                 IsDone = true,
-                ToDoCategory = home
+                ToDoCategory = home,
+                ToDoStatus = Enum.ToDoStatus.WorkInProgress
             };
             ToDo driveFast = new ToDo
             {
                 ToDoName = "Poilsis",
                 Description = "Kartingai",
                 IsDone = true,
-                ToDoCategory = home
+                ToDoCategory = home,
+                ToDoStatus = Enum.ToDoStatus.Planned
             };
             context.ToDos.AddRange(post, buy, meeting, rest, driveFast);
 
